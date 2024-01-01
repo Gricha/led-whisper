@@ -7,3 +7,10 @@ description = "A simple server that can control LED light setting based on voice
 
 
 [dependencies]
+anyhow = "1.0.78"
+axum = "0.7.3"
+cpal = { version="0.15.2", features = ["jack"] }
+hound = "3.5.1"
+tokio = { version = "1.35", features = ["macros", "rt-multi-thread"] }
+tower = "0.4.13"
+tower-http = "0.5.0"

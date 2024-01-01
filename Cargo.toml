@@ -1,0 +1,9 @@
+[package]
+name = "led-whisper"
+version = "0.1.0"
+edition = "2021"
+authors = ["Greg Pstrucha"]
+description = "A simple server that can control LED light setting based on voice commands"
+
+
+[dependencies]

@@ -21,14 +21,19 @@ pub fn start_recording() -> Result<(), anyhow::Error> {
         .filter(|x| x.default_input_config().is_ok())
         .collect::<Vec<_>>();
     for device in devices.iter() {
-        println!("Device: {:?}", device.default_input_config());
+        println!(
+            "Available Device: {} {:?}",
+            device.name().unwrap(),
+            device.default_input_config()
+        );
     }
 
     println!("Number of devices found for the profile: {}", devices.len());
 
     let device = devices.into_iter().next().expect("A device must exist");
     println!(
-        "Selected device: {:?}",
+        "Selected device: {} {:?}",
+        device.name().unwrap(),
         device.default_input_config().unwrap()
     );
 

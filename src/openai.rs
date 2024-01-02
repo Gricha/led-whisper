@@ -41,11 +41,8 @@ impl ToString for AudioResponseFormat {
 }
 
 impl Client {
-
     pub fn new(api_key: String) -> Self {
-        Self {
-            api_key
-        }
+        Self { api_key }
     }
 
     pub async fn audio_transcribe(

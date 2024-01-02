@@ -9,7 +9,9 @@ use cpal::{
     FromSample, Sample,
 };
 
-pub async fn start_recording() -> Result<(), anyhow::Error> {
+pub const RECORDING_PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/recorded.wav");
+
+pub fn start_recording() -> Result<(), anyhow::Error> {
     let host = cpal::default_host();
 
     // We're trying to filter out to a device that has any input configuration.
@@ -24,10 +26,6 @@ pub async fn start_recording() -> Result<(), anyhow::Error> {
 
     println!("Number of devices found for the profile: {}", devices.len());
 
-    // let device = host
-    //     .default_input_device()
-    //     .expect("Failed to obtain default input device");
-
     let device = devices.into_iter().next().expect("A device must exist");
     println!(
         "Selected device: {:?}",
@@ -38,7 +36,7 @@ pub async fn start_recording() -> Result<(), anyhow::Error> {
         .default_input_config()
         .expect("Failed to obtain device config");
 
-    const PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/recorded.wav");
+    const PATH: &str = RECORDING_PATH;
     let spec = wav_spec_from_config(&config);
     let writer = hound::WavWriter::create(PATH, spec)?;
     let writer = Arc::new(Mutex::new(Some(writer)));
